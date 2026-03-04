@@ -309,23 +309,26 @@ function render() {
 document.getElementById("btnReveal").onclick = () => {
   revealed = true;
   const key = `${lessonIdx}-${qIdx}`;
+  const q = question();
+  const isRight = q.correct.slice().sort().join() === selected.slice().sort().join();
+
   if (!answered.has(key)) {
     answered.add(key);
-    const q = question();
-    const isRight = q.correct.slice().sort().join() === selected.slice().sort().join();
-    if (isRight) {
-  score++;
-  setTimeout(() => showGif("correct"), 800);
-} else {
-  const hasSomeRight = selected.some(i => q.correct.includes(i));
-  if (selected.length > 0 && hasSomeRight) {
-    setTimeout(() => showGif("partial"), 800);
-  } else {
-    setTimeout(() => showGif("wrong"), 800);
-  }
-}
+    if (isRight) score++;
     updateScore();
   }
+
+  if (isRight) {
+    setTimeout(() => showGif("correct"), 800);
+  } else {
+    const hasSomeRight = selected.some(i => q.correct.includes(i));
+    if (selected.length > 0 && hasSomeRight) {
+      setTimeout(() => showGif("partial"), 800);
+    } else {
+      setTimeout(() => showGif("wrong"), 800);
+    }
+  }
+
   renderQCM();
 };
 
