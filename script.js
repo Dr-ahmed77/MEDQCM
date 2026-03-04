@@ -4,7 +4,7 @@
 
 // ── DATA ──────────────────────────────────────
 const LESSONS = {
-  Cardiology: [
+  Immunologie: [
     {
       q: "Which of the following are classic modifiable risk factors for coronary artery disease?",
       opts: ["Hypertension", "Hypercholesterolaemia", "Low BMI", "Diabetes mellitus", "Smoking"],
@@ -30,7 +30,7 @@ const LESSONS = {
       exp: "Severe AS: velocity >4 m/s, area <1 cm², mean gradient >40 mmHg, soft/absent A2. Wide pulse pressure is characteristic of aortic REGURGITATION, not stenosis."
     }
   ],
-  Pulmonology: [
+  Génitique: [
     {
       q: "Which spirometric findings indicate obstructive lung disease?",
       opts: ["FEV1/FVC < 0.70", "Increased total lung capacity", "Reduced FVC only", "Elevated residual volume", "Reduced DLCO in emphysema"],
@@ -50,34 +50,7 @@ const LESSONS = {
       exp: "S. pneumoniae is the most common CAP pathogen. Atypicals (Mycoplasma, Legionella) and H. influenzae are common. Pseudomonas typically causes nosocomial pneumonia."
     }
   ],
-  Nephrology: [
-    {
-      q: "Which are causes of pre-renal acute kidney injury?",
-      opts: ["Severe hypovolaemia", "Septic shock", "Aminoglycoside nephrotoxicity", "Congestive heart failure", "Hepatorenal syndrome"],
-      correct: [0, 1, 3, 4],
-      exp: "Pre-renal AKI = reduced kidney perfusion: hypovolaemia, septic shock, heart failure, hepatorenal syndrome. Aminoglycosides cause direct tubular (intrinsic) toxicity."
-    },
-    {
-      q: "Features of nephrotic syndrome include:",
-      opts: ["Proteinuria > 3.5 g/day", "Hypoalbuminaemia", "Defining haematuria", "Peripheral oedema", "Hyperlipidaemia and lipiduria"],
-      correct: [0, 1, 3, 4],
-      exp: "Nephrotic: heavy proteinuria, hypoalbuminaemia, oedema, hyperlipidaemia, lipiduria. Haematuria is the hallmark of NEPHRITIC syndrome, not nephrotic."
-    }
-  ],
-  Pharmacology: [
-    {
-      q: "Which of the following are CYP3A4 inhibitors (increase drug toxicity)?",
-      opts: ["Ketoconazole", "Clarithromycin", "Rifampicin", "Grapefruit juice", "Erythromycin"],
-      correct: [0, 1, 3, 4],
-      exp: "CYP3A4 inhibitors: azoles, macrolides (erythromycin, clarithromycin), grapefruit juice, ritonavir. Rifampicin is a potent INDUCER — it decreases drug levels."
-    },
-    {
-      q: "Regarding beta-blockers, which statements are true?",
-      opts: ["Contraindicated in acute decompensated asthma", "Propranolol is non-selective (β1+β2)", "Metoprolol is cardioselective (β1)", "Mask tachycardia in hypoglycaemia", "Safe to use in cocaine chest pain"],
-      correct: [0, 1, 2, 3],
-      exp: "BBs contraindicated in acute asthma. Propranolol: β1+β2. Metoprolol: β1-selective. They blunt tachycardia (hypoglycaemia sign). In cocaine toxicity, non-selective BBs cause unopposed α-vasoconstriction — dangerous."
-    }
-  ]
+  
 };
 
 // ── CONSTANTS ─────────────────────────────────
