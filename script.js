@@ -2,55 +2,93 @@
    MedQCM — script.js
    ================================ */
 
-// ── DATA ──────────────────────────────────────
+// ══════════════════════════════════════════════
+//  DATA
+//  • Pour ajouter une QUESTION : copiez un bloc { q, opts, correct, exp }
+//  • Pour ajouter un MODULE    : ajoutez NomModule: [ ... ] dans LESSONS
+// ══════════════════════════════════════════════
 const LESSONS = {
+
   Immunologie: [
     {
-      q: "Which of the following are classic modifiable risk factors for coronary artery disease?",
-      opts: ["Hypertension", "Hypercholesterolaemia", "Low BMI", "Diabetes mellitus", "Smoking"],
-      correct: [0, 1, 3, 4],
-      exp: "The five major modifiable CAD risk factors are hypertension, dyslipidaemia, diabetes, smoking, and obesity. Low BMI and regular exercise are protective, not risk factors."
+      q: "Quels sont les organes lymphoïdes primaires ?",
+      opts: ["Thymus", "Rate", "Moelle osseuse", "Ganglions lymphatiques", "Plaques de Peyer"],
+      correct: [0, 2],
+      exp: "Les organes lymphoïdes primaires sont la moelle osseuse (maturation des LB) et le thymus (maturation des LT). La rate, les ganglions et les plaques de Peyer sont des organes secondaires."
     },
     {
-      q: "Regarding acute STEMI management, which statements are correct?",
-      opts: ["Primary PCI preferred if available within 120 min", "Aspirin is contraindicated acutely", "ST elevation ≥1 mm in ≥2 contiguous limb leads", "New LBBB may be STEMI equivalent", "Troponin elevation confirms myocardial necrosis"],
-      correct: [0, 2, 3, 4],
-      exp: "Primary PCI is gold standard if door-to-balloon ≤120 min. Aspirin 300 mg is given immediately. New LBBB is treated as STEMI equivalent. Troponin confirms necrosis."
+      q: "Concernant les immunoglobulines, quelles affirmations sont exactes ?",
+      opts: ["Les IgG traversent le placenta", "Les IgM sont les premières produites lors d'une réponse primaire", "Les IgA sont abondantes dans les sécrétions", "Les IgE sont impliquées dans l'allergie", "Les IgD activent le complément"],
+      correct: [0, 1, 2, 3],
+      exp: "Les IgG traversent le placenta. Les IgM sont les premières synthétisées. Les IgA dominent dans les sécrétions. Les IgE médient l'hypersensibilité de type I. Les IgD n'activent pas le complément."
     },
     {
-      q: "Which drugs are first-line in heart failure with reduced ejection fraction (HFrEF)?",
-      opts: ["ACE inhibitor / ARNi", "Beta-blocker", "Loop diuretic (first-line)", "Aldosterone antagonist", "Digoxin (first-line)"],
+      q: "L'hypersensibilité de type I (anaphylactique) implique :",
+      opts: ["Les IgE", "Les mastocytes", "Les IgG exclusivement", "L'histamine", "Les lymphocytes T cytotoxiques"],
       correct: [0, 1, 3],
-      exp: "Proven mortality benefit in HFrEF: ACE-i/ARNi, beta-blockers, and aldosterone antagonists. Loop diuretics relieve symptoms but don't reduce mortality. Digoxin is adjunct only."
+      exp: "L'hypersensibilité de type I est médiée par les IgE fixées sur les mastocytes. La dégranulation libère l'histamine. Les LT cytotoxiques sont impliqués dans le type IV."
     },
     {
-      q: "Signs of severe aortic stenosis include:",
-      opts: ["Peak jet velocity > 4 m/s", "Valve area < 1 cm²", "Wide pulse pressure", "Mean gradient > 40 mmHg", "Soft or absent A2"],
-      correct: [0, 1, 3, 4],
-      exp: "Severe AS: velocity >4 m/s, area <1 cm², mean gradient >40 mmHg, soft/absent A2. Wide pulse pressure is characteristic of aortic REGURGITATION, not stenosis."
-    }
+      q: "Le CMH de classe II présente les antigènes aux :",
+      opts: ["Lymphocytes T CD4+", "Lymphocytes T CD8+", "Lymphocytes B", "Cellules NK", "Macrophages"],
+      correct: [0],
+      exp: "Le CMH II présente les antigènes exogènes aux LT CD4+ (helper). Le CMH I présente aux LT CD8+ (cytotoxiques)."
+    },
+    {
+      q: "Quels mécanismes sont impliqués dans la tolérance centrale ?",
+      opts: ["Sélection positive thymique", "Sélection négative thymique", "Anergie périphérique", "Délétion clonale centrale", "Régulation par les Treg"],
+      correct: [0, 1, 3],
+      exp: "La tolérance centrale se fait dans le thymus : sélection positive et négative (délétion des T auto-réactifs). L'anergie et les Treg relèvent de la tolérance périphérique."
+    },
+    // ─── AJOUTEZ VOS QUESTIONS IMMUNOLOGIE ICI ───
+    // {
+    //   q: "Votre question ?",
+    //   opts: ["A", "B", "C", "D", "E"],
+    //   correct: [0, 1],
+    //   exp: "Explication..."
+    // },
   ],
-  Génitique: [
+
+  Génétique: [
     {
-      q: "Which spirometric findings indicate obstructive lung disease?",
-      opts: ["FEV1/FVC < 0.70", "Increased total lung capacity", "Reduced FVC only", "Elevated residual volume", "Reduced DLCO in emphysema"],
-      correct: [0, 1, 3, 4],
-      exp: "Obstruction: FEV1/FVC <0.70, TLC and RV elevated (air trapping). DLCO reduced in emphysema. Reduced FVC alone suggests restriction."
+      q: "Concernant la mitose, quelles propositions sont correctes ?",
+      opts: ["Elle produit 2 cellules filles identiques", "Elle réduit le nombre de chromosomes de moitié", "Elle comprend prophase, métaphase, anaphase, télophase", "Elle est à l'origine de la diversité génétique", "Elle maintient le nombre diploïde (2n)"],
+      correct: [0, 2, 4],
+      exp: "La mitose produit 2 cellules filles diploïdes identiques (2n) en 4 phases. C'est la méiose qui réduit le nombre de chromosomes et génère la diversité génétique."
     },
     {
-      q: "Regarding pulmonary embolism diagnosis and management:",
-      opts: ["D-dimer rules out PE in low-probability patients", "CTPA is the imaging gold standard", "S1Q3T3 on ECG is pathognomonic", "Heparin must overlap warfarin ≥5 days", "Elevated troponin signals RV injury"],
+      q: "L'hérédité autosomique récessive se caractérise par :",
+      opts: ["Atteinte des deux sexes également", "Parents souvent porteurs sains", "Transmission de père en fils obligatoire", "Risque de 25% si deux parents hétérozygotes", "Saut de générations possible"],
       correct: [0, 1, 3, 4],
-      exp: "D-dimer is highly sensitive (good rule-out). CTPA is gold standard. S1Q3T3 suggests but is NOT pathognomonic. Heparin-warfarin overlap ≥5 days. Troponin rise = RV injury."
+      exp: "L'AR touche les deux sexes. Les parents sont souvent hétérozygotes (porteurs sains). Si Aa×Aa : 25% atteints. Les sauts de génération sont possibles."
     },
     {
-      q: "Common community-acquired pneumonia (CAP) pathogens include:",
-      opts: ["Streptococcus pneumoniae", "Mycoplasma pneumoniae", "Pseudomonas aeruginosa", "Haemophilus influenzae", "Legionella pneumophila"],
+      q: "La trisomie 21 (syndrome de Down) est associée à :",
+      opts: ["Un chromosome 21 surnuméraire", "Une translocation robertsonienne dans certains cas", "Une non-disjonction méiotique", "Une délétion chromosomique", "Un risque augmenté avec l'âge maternel"],
+      correct: [0, 1, 2, 4],
+      exp: "La T21 est due à un chr 21 en triple (non-disjonction méiotique dans 95% des cas). Dans 4% c'est une translocation robertsonienne t(14;21). Le risque augmente avec l'âge maternel."
+    },
+    {
+      q: "Concernant les mutations, quelles affirmations sont vraies ?",
+      opts: ["Une mutation faux-sens change un acide aminé", "Une mutation non-sens introduit un codon stop prématuré", "Une mutation silencieuse change toujours la protéine", "Les mutations frameshift décalent le cadre de lecture", "Toutes les mutations sont pathogènes"],
+      correct: [0, 1, 3],
+      exp: "Faux-sens : AA différent. Non-sens : codon stop prématuré. Silencieuse : même AA, pas de changement protéique. Frameshift : décalage du cadre de lecture. Toutes les mutations ne sont pas pathogènes."
+    },
+    {
+      q: "L'hérédité liée à l'X récessive : quelles propositions sont exactes ?",
+      opts: ["Les femmes conductrices transmettent le gène", "Les hommes atteints transmettent le gène à toutes leurs filles", "Un homme atteint peut transmettre à ses fils directement", "Le risque pour un fils d'une conductrice est de 50%", "Les femmes homozygotes peuvent être atteintes"],
       correct: [0, 1, 3, 4],
-      exp: "S. pneumoniae is the most common CAP pathogen. Atypicals (Mycoplasma, Legionella) and H. influenzae are common. Pseudomonas typically causes nosocomial pneumonia."
-    }
+      exp: "Les conductrices (XᴬXᵃ) transmettent le gène. Un père atteint donne Xᵃ à toutes ses filles. Il ne transmet pas à ses fils. Risque pour fils d'une conductrice : 50%."
+    },
+    // ─── AJOUTEZ VOS QUESTIONS GÉNÉTIQUE ICI ───
+    // {
+    //   q: "Votre question ?",
+    //   opts: ["A", "B", "C", "D", "E"],
+    //   correct: [0],
+    //   exp: "Explication..."
+    // },
   ],
-  
+
 };
 
 // ── CONSTANTS ─────────────────────────────────
@@ -85,7 +123,6 @@ function playTick() {
 // ── HELPERS ────────────────────────────────────
 function questions() { return LESSONS[LESSON_NAMES[lessonIdx]]; }
 function question()  { return questions()[qIdx]; }
-
 function pad(n)      { return n < 10 ? "0" + n : "" + n; }
 
 let toastTimer;
@@ -105,12 +142,30 @@ function buildTabs() {
     const btn = document.createElement("button");
     btn.className = "lesson-tab" + (i === lessonIdx ? " active" : "");
     btn.textContent = name;
-    btn.onclick = () => {
-      lessonIdx = i; qIdx = 0; selected = []; answered = new Set(); score = 0;
-      render();
-    };
+    btn.onclick = () => switchLesson(i);
     container.appendChild(btn);
   });
+}
+
+// ── BUG FIX 1 : switch lesson resets TOUT ─────
+function switchLesson(i) {
+  lessonIdx = i;
+  qIdx      = 0;
+  selected  = [];
+  revealed  = false;       // ← reset revealed
+  flashMode = false;       // ← reset mode flashcard aussi
+  fcFlipped = false;
+  score     = 0;
+  answered  = new Set();
+
+  // reset UI flashcard button
+  document.getElementById("btnFlashcard").classList.remove("active");
+  document.getElementById("qcmMode").classList.add("active");
+  document.getElementById("flashMode").classList.remove("active");
+
+  buildTabs();
+  updateScore();
+  renderQCM();             // ← force QCM render immédiatement
 }
 
 // ── PROGRESS ──────────────────────────────────
@@ -144,19 +199,20 @@ function buildDots(containerId, count, current, clickFn) {
 function renderQCM() {
   const q = question();
 
+  // BUG FIX 2 : on force le re-render complet de la carte
+  // en recréant le contenu — plus de state "bloqué"
   document.getElementById("qNum").textContent  = pad(qIdx + 1);
   document.getElementById("qText").textContent = q.q;
 
-  // Options
   const list = document.getElementById("optionsList");
   list.innerHTML = "";
   q.opts.forEach((opt, i) => {
     const div = document.createElement("div");
     div.className = "opt";
     if (revealed) {
-      if (q.correct.includes(i))        div.classList.add("correct");
-      else if (selected.includes(i))    div.classList.add("wrong");
-    } else if (selected.includes(i))    div.classList.add("selected");
+      if (q.correct.includes(i))     div.classList.add("correct");
+      else if (selected.includes(i)) div.classList.add("wrong");
+    } else if (selected.includes(i)) div.classList.add("selected");
 
     div.innerHTML = `<div class="opt-letter">${LETTERS[i]}</div><div class="opt-text">${opt}</div>`;
     div.onclick = () => {
@@ -172,19 +228,21 @@ function renderQCM() {
   // Reveal panel
   const panel = document.getElementById("revealPanel");
   const btn   = document.getElementById("btnReveal");
+
+  // BUG FIX 2 suite : reset panel à chaque render
   if (revealed) {
     panel.classList.add("open");
     btn.classList.add("hidden");
-    // Correct letters
-    const cl = document.getElementById("correctLetters");
-    cl.innerHTML = q.correct.map(i => `<span>${LETTERS[i]}</span>`).join("");
+    document.getElementById("correctLetters").innerHTML =
+      q.correct.map(i => `<span>${LETTERS[i]}</span>`).join("");
     document.getElementById("explanation").textContent = q.exp;
   } else {
     panel.classList.remove("open");
     btn.classList.remove("hidden");
+    document.getElementById("correctLetters").innerHTML = "";
+    document.getElementById("explanation").textContent  = "";
   }
 
-  // Nav buttons
   document.getElementById("prevBtn").disabled = qIdx === 0;
   document.getElementById("nextBtn").disabled = qIdx === questions().length - 1;
 
@@ -196,6 +254,7 @@ function renderQCM() {
 }
 
 // ── FLASHCARD RENDER ──────────────────────────
+// BUG FIX 3 : flashcard indépendant par module
 function renderFlashcard() {
   const q = question();
 
@@ -203,6 +262,7 @@ function renderFlashcard() {
   document.getElementById("fcAns").textContent = q.correct.map(i => q.opts[i]).join(" — ");
   document.getElementById("fcExp").textContent = q.exp;
 
+  // reset flip à chaque nouvelle carte / nouveau module
   const fc = document.getElementById("fc");
   fc.classList.remove("flipped");
   fcFlipped = false;
@@ -215,6 +275,14 @@ function renderFlashcard() {
   });
 
   updateProgress();
+}
+
+// ── RENDER ────────────────────────────────────
+function render() {
+  buildTabs();
+  updateScore();
+  if (flashMode) renderFlashcard();
+  else           renderQCM();
 }
 
 // ── EVENTS ────────────────────────────────────
@@ -235,10 +303,16 @@ document.getElementById("btnReveal").onclick = () => {
 
 // QCM nav
 document.getElementById("prevBtn").onclick = () => {
-  if (qIdx > 0) { qIdx--; selected = []; revealed = false; renderQCM(); updateProgress(); }
+  if (qIdx > 0) {
+    qIdx--; selected = []; revealed = false;
+    renderQCM(); updateProgress();
+  }
 };
 document.getElementById("nextBtn").onclick = () => {
-  if (qIdx < questions().length - 1) { qIdx++; selected = []; revealed = false; renderQCM(); updateProgress(); }
+  if (qIdx < questions().length - 1) {
+    qIdx++; selected = []; revealed = false;
+    renderQCM(); updateProgress();
+  }
 };
 
 // Flashcard flip
@@ -259,8 +333,9 @@ document.getElementById("fcNext").onclick = () => {
 // Toggle flashcard mode
 document.getElementById("btnFlashcard").onclick = () => {
   flashMode = !flashMode;
+  fcFlipped = false;
   document.getElementById("btnFlashcard").classList.toggle("active", flashMode);
-  document.getElementById("qcmMode").classList.toggle("active", !flashMode);
+  document.getElementById("qcmMode").classList.toggle("active",  !flashMode);
   document.getElementById("flashMode").classList.toggle("active",  flashMode);
   if (flashMode) renderFlashcard();
   else           renderQCM();
@@ -271,7 +346,7 @@ document.getElementById("btnSave").onclick = () => {
   localStorage.setItem("medqcm_save", JSON.stringify({
     lessonIdx, qIdx, score, answered: [...answered]
   }));
-  showToast("✓  Progress saved");
+  showToast("✓  Progression sauvegardée");
 };
 
 // ── LOAD SAVE ─────────────────────────────────
@@ -289,6 +364,4 @@ function loadSave() {
 
 // ── INIT ──────────────────────────────────────
 loadSave();
-buildTabs();
-renderQCM();
-updateScore();
+render();
