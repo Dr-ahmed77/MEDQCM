@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MedQCM</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      MEDQCM
+    </div>
+    <div class="header-right">
+      <button id="btnFlashcard" class="chip">⧉ Flashcard</button>
+      <button id="btnSave"      class="chip">◈ Save</button>
+      <div class="score-box">Score: <span id="scoreVal">0</span>/<span id="totalVal">0</span></div>
+    </div>
+  </header>
+
+  <!-- LESSONS -->
+  <div class="lesson-bar">
+    <div id="lessonTabs" class="lesson-tabs"></div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+    <span id="progressLabel" class="progress-label">1 / 1</span>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- QCM MODE -->
+    <div id="qcmMode" class="mode active">
+      <div class="card" id="qcmCard">
+        <div class="card-top">
+          <div class="q-num" id="qNum">01</div>
+          <div class="q-badge">Multiple Choice</div>
+        </div>
+        <div class="q-text" id="qText"></div>
+        <div class="options" id="optionsList"></div>
+        <div class="card-actions">
+          <button id="btnReveal" class="btn-reveal">Show Answer</button>
+        </div>
+        <div class="reveal-panel" id="revealPanel">
+          <div class="correct-row">
+            <span class="correct-lbl">Correct</span>
+            <div id="correctLetters" class="correct-letters"></div>
+          </div>
+          <div id="explanation" class="explanation"></div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button id="prevBtn" class="btn-nav">← Prev</button>
+        <div id="dots" class="dots"></div>
+        <button id="nextBtn" class="btn-nav">Next →</button>
+      </div>
+    </div>
+
+    <!-- FLASHCARD MODE -->
+    <div id="flashMode" class="mode">
+      <div class="fc-scene">
+        <div class="fc" id="fc">
+          <div class="fc-front">
+            <span class="fc-tag">Question</span>
+            <p class="fc-q" id="fcQ"></p>
+            <span class="fc-hint">Tap to flip</span>
+          </div>
+          <div class="fc-back">
+            <span class="fc-tag">Answer</span>
+            <p class="fc-ans" id="fcAns"></p>
+            <p class="fc-exp" id="fcExp"></p>
+          </div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button id="fcPrev" class="btn-nav">← Prev</button>
+        <div id="fcDots" class="dots"></div>
+        <button id="fcNext" class="btn-nav">Next →</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
