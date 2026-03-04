@@ -93,6 +93,24 @@ const LESSONS = {
 
 // ── CONSTANTS ─────────────────────────────────
 const LETTERS      = ["A","B","C","D","E"];
+const GIFS = {
+  correct: "https://media.giphy.com/media/JRQwUPUyyw69LENPFx/giphy.gif",
+  partial: "https://media.giphy.com/media/mvnCob7ltFFLhP7Bgk/giphy.gif",
+  wrong:   "https://media.giphy.com/media/EVRFXLkjI5QsZm0iNR/giphy.gif"
+};
+
+function showGif(type) {
+  const overlay = document.createElement("div");
+  overlay.style.cssText = `
+    position:fixed; inset:0; z-index:9999;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.5); animation: fadeIn 0.2s ease;
+  `;
+  overlay.innerHTML = `<img src="${GIFS[type]}" style="width:280px; border-radius:16px;">`;
+  overlay.onclick = () => overlay.remove();
+  document.body.appendChild(overlay);
+  setTimeout(() => overlay.remove(), 2500);
+}
 const LESSON_NAMES = Object.keys(LESSONS);
 
 // ── STATE ──────────────────────────────────────
@@ -295,7 +313,15 @@ document.getElementById("btnReveal").onclick = () => {
     answered.add(key);
     const q = question();
     const isRight = q.correct.slice().sort().join() === selected.slice().sort().join();
-    if (isRight) score++;
+    if (isRight) {
+  score++;
+  showGif("correct");
+} else {
+  const hasAnySel  = selected.length > 0;
+  const hasSomeRight = selected.some(i => q.correct.includes(i));
+  if (hasAnySel && hasSomeRight) showGif("partial");
+  else showGif("wrong");
+}
     updateScore();
   }
   renderQCM();
