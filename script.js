@@ -315,12 +315,14 @@ document.getElementById("btnReveal").onclick = () => {
     const isRight = q.correct.slice().sort().join() === selected.slice().sort().join();
     if (isRight) {
   score++;
-  showGif("correct");
+  setTimeout(() => showGif("correct"), 800);
 } else {
-  const hasAnySel  = selected.length > 0;
   const hasSomeRight = selected.some(i => q.correct.includes(i));
-  if (hasAnySel && hasSomeRight) showGif("partial");
-  else showGif("wrong");
+  if (selected.length > 0 && hasSomeRight) {
+    setTimeout(() => showGif("partial"), 800);
+  } else {
+    setTimeout(() => showGif("wrong"), 800);
+  }
 }
     updateScore();
   }
