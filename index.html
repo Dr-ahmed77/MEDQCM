@@ -1,35 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MedQCM</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+
+  <!-- ambient orbs -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
   <!-- HEADER -->
   <header class="header">
     <div class="logo">
-      <span class="logo-dot"></span>
-      MEDQCM
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+        <rect x="2" y="2" width="28" height="28" rx="8" fill="url(#lg1)"/>
+        <path d="M16 8v16M8 16h16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+        <defs><linearGradient id="lg1" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#3b82f6"/><stop offset="1" stop-color="#6366f1"/>
+        </linearGradient></defs>
+      </svg>
+      <span>Med<em>QCM</em></span>
+    </div>
+    <div class="header-center">
+      <div class="mode-toggle">
+        <button id="btnQCM" class="toggle-btn active">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          QCM
+        </button>
+        <button id="btnFlashcard" class="toggle-btn">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Flashcard
+        </button>
+      </div>
     </div>
     <div class="header-right">
-      <button id="btnFlashcard" class="chip">⧉ Flashcard</button>
-      <button id="btnSave"      class="chip">◈ Save</button>
-      <div class="score-box">Score: <span id="scoreVal">0</span>/<span id="totalVal">0</span></div>
+      <div class="score-pill">
+        <span class="score-icon">⚡</span>
+        <span id="scoreVal">0</span><span class="score-sep">/</span><span id="totalVal">0</span>
+      </div>
+      <button id="btnSave" class="btn-icon" title="Save progress">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M5 2h8l3 3v13a1 1 0 01-1 1H5a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5"/><path d="M7 2v5h6V2M7 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
     </div>
   </header>
 
-  <!-- LESSONS -->
+  <!-- LESSON TABS -->
   <div class="lesson-bar">
     <div id="lessonTabs" class="lesson-tabs"></div>
   </div>
 
   <!-- PROGRESS -->
   <div class="progress-wrap">
-    <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+    <div class="progress-track">
+      <div id="progressFill" class="progress-fill"></div>
+    </div>
     <span id="progressLabel" class="progress-label">1 / 1</span>
   </div>
 
@@ -39,27 +68,46 @@
     <!-- QCM MODE -->
     <div id="qcmMode" class="mode active">
       <div class="card" id="qcmCard">
-        <div class="card-top">
-          <div class="q-num" id="qNum">01</div>
-          <div class="q-badge">Multiple Choice</div>
-        </div>
-        <div class="q-text" id="qText"></div>
-        <div class="options" id="optionsList"></div>
-        <div class="card-actions">
-          <button id="btnReveal" class="btn-reveal">Show Answer</button>
-        </div>
-        <div class="reveal-panel" id="revealPanel">
-          <div class="correct-row">
-            <span class="correct-lbl">Correct</span>
-            <div id="correctLetters" class="correct-letters"></div>
+        <div class="card-header">
+          <div class="q-meta">
+            <span class="q-num-badge" id="qNum">01</span>
+            <span class="q-type-badge">Multiple Choice</span>
           </div>
-          <div id="explanation" class="explanation"></div>
+          <div class="q-actions-top">
+            <div id="dots" class="dots"></div>
+          </div>
         </div>
-      </div>
-      <div class="nav-row">
-        <button id="prevBtn" class="btn-nav">← Prev</button>
-        <div id="dots" class="dots"></div>
-        <button id="nextBtn" class="btn-nav">Next →</button>
+
+        <p class="q-text" id="qText"></p>
+
+        <div class="options" id="optionsList"></div>
+
+        <div class="card-footer">
+          <div class="nav-btns">
+            <button id="prevBtn" class="btn-nav">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Prev
+            </button>
+            <button id="nextBtn" class="btn-nav">
+              Next
+              <svg viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <button id="btnReveal" class="btn-reveal">
+            <span>Show Answer</span>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3C4.5 3 2 8 2 8s2.5 5 6 5 6-5 6-5-2.5-5-6-5z" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>
+          </button>
+        </div>
+
+        <div class="reveal-panel" id="revealPanel">
+          <div class="reveal-inner">
+            <div class="correct-row">
+              <span class="correct-label">Correct answers</span>
+              <div id="correctLetters" class="correct-letters"></div>
+            </div>
+            <div id="explanation" class="explanation"></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -68,21 +116,30 @@
       <div class="fc-scene">
         <div class="fc" id="fc">
           <div class="fc-front">
-            <span class="fc-tag">Question</span>
+            <div class="fc-label">Question</div>
             <p class="fc-q" id="fcQ"></p>
-            <span class="fc-hint">Tap to flip</span>
+            <div class="fc-hint">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Tap to reveal answer
+            </div>
           </div>
           <div class="fc-back">
-            <span class="fc-tag">Answer</span>
+            <div class="fc-label">Answer</div>
             <p class="fc-ans" id="fcAns"></p>
             <p class="fc-exp" id="fcExp"></p>
           </div>
         </div>
       </div>
-      <div class="nav-row">
-        <button id="fcPrev" class="btn-nav">← Prev</button>
+      <div class="fc-nav">
+        <button id="fcPrev" class="btn-nav">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Prev
+        </button>
         <div id="fcDots" class="dots"></div>
-        <button id="fcNext" class="btn-nav">Next →</button>
+        <button id="fcNext" class="btn-nav">
+          Next
+          <svg viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
 
